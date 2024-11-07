@@ -37,3 +37,22 @@ Execution time for NEON Assembly version: 0.008848 seconds
     #pragma clang optimize on
     // Restore global optimization settings
     #pragma GCC pop_options
+
+### conclusion
+
+Execution time for Basic C version without Optimisation: 0.107987 seconds
+Execution time for Basic C version: 0.0199 seconds
+Execution time for NEON Intrinsics version: 0.015030 seconds
+Execution time for NEON Assembly version: 0.008848 seconds
+
+The base version execution time is over 10 times slower than the best optimised version.
+Automatic optimisation of the basic version through -O3 is powerful an gains > 5x speedup already.
+Intrinsics increase the speed another 25%
+NEON assembly yields amazing results but usually would take lots of manual work and knowledge. ChatGPT was surprisingly good at creating code that compiles without error. Especially intrinsics and even asm!
+
+### the catch
+
+`Outputs do not match; there may be an issue with one of the implementations.`
+
+The performance results MAY be influenced by potential defective code/behaviour, as the results seem to differ compared to the basic version.
+I have not checked those results so far.
