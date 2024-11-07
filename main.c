@@ -45,6 +45,13 @@ void initialize_matrix(double *matrix, int n, int m) {
     }
 }
 
+// Disable specific optimizations for Version 1
+#pragma GCC push_options
+#pragma GCC optimize ("no-unroll-loops")
+#pragma GCC optimize ("no-tree-vectorize")
+#pragma GCC optimize ("no-inline")
+// Disable all optimizations for Version 1
+#pragma clang optimize off
 void gaussian_filter_basic(double *input, double *output, int n, int m, double kernel[11][11]) {
     int pad = 5; // Padding for a 11x11 kernel is 5 pixels
     for (int i = pad; i < n - pad; i++) {
@@ -61,6 +68,10 @@ void gaussian_filter_basic(double *input, double *output, int n, int m, double k
         }
     }
 }
+// Re-enable optimizations after this function
+#pragma clang optimize on
+// Restore global optimization settings
+#pragma GCC pop_options
 
 void gaussian_filter_neon_intrinsics(double *input, double *output, int n, int m, double kernel[11][11]) {
     int pad = 5; // Padding for a 11x11 kernel
